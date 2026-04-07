@@ -198,23 +198,54 @@ body {
 @media (max-width: 900px) {
   .container {
     width: min(98vw, 1320px);
+    padding: 16px 0 24px;
+  }
+
+  .hero {
+    margin-bottom: 10px;
   }
 
   .hero h1 {
-    font-size: 1.9rem;
+    font-size: 1.7rem;
   }
 
   .book-stage {
     -webkit-overflow-scrolling: touch;
+    overflow-x: visible;
+    gap: 12px;
   }
 
   .book-frame {
-    min-width: 920px;
-    min-height: 520px;
+    width: 94vw;
+    min-width: 94vw;
+    min-height: auto;
+    aspect-ratio: 16 / 9;
+    padding: 10px;
+  }
+
+  .book-spine {
+    width: 12px;
   }
 
   .book-page {
-    min-height: 440px;
+    min-height: auto;
+    margin: 6px;
+    padding: 10px 10px 28px;
+  }
+
+  .image-wrap {
+    border-width: 5px;
+  }
+
+  .page-number {
+    right: 10px;
+    bottom: 8px;
+    font-size: 0.78rem;
+  }
+
+  #pageIndicator {
+    padding: 8px 12px;
+    font-size: 0.9rem;
   }
 }
 
