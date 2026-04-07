@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f39ac7" />
+  <title>Libro Virtual Bonito</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="hero">
+      <p class="eyebrow">💌 Para ti</p>
+      <h1>Nuestro libro</h1>
+    </header>
+
+    <section class="book-stage">
+      <div class="book-frame">
+        <div class="book-spine"></div>
+        <article class="book-page left" id="leftPage"></article>
+        <article class="book-page right" id="rightPage"></article>
+      </div>
+
+      <div class="book-actions">
+        <button id="prevBtn" aria-label="Página anterior">←</button>
+        <span id="pageIndicator">Vista 1 de 9</span>
+        <button id="nextBtn" aria-label="Página siguiente">→</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const pages = [
+      "imagenes/imagen1.jpg",
+      "imagenes/imagen2.jpg",
+      "imagenes/imagen3.jpg",
+      "imagenes/imagen4.jpg",
+      "imagenes/imagen5.jpg",
+      "imagenes/imagen6.jpg",
+      "imagenes/imagen7.jpg",
+      "imagenes/imagen8.jpg",
+      "imagenes/imagen9.jpg",
+      "imagenes/imagen10.jpg",
+      "imagenes/imagen11.jpg",
+      "imagenes/imagen12.jpg",
+      "imagenes/imagen13.jpg",
+      "imagenes/imagen14.jpg",
+      "imagenes/imagen15.jpg",
+      "imagenes/imagen16.jpg",
+      "imagenes/imagen17.jpg"
+    ];
+
+    const leftPage = document.getElementById("leftPage");
+    const rightPage = document.getElementById("rightPage");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const pageIndicator = document.getElementById("pageIndicator");
+
+    const spreadCount = Math.ceil(pages.length / 2);
+    let currentSpread = 0;
+
+    function createFallback(pageNumber) {
+      const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000">
+          <defs>
+            <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0%" stop-color="#ffdce9" />
+              <stop offset="100%" stop-color="#fff7fb" />
+            </linearGradient>
+          </defs>
+          <rect width="800" height="1000" rx="38" fill="url(#g)" />
+          <text x="400" y="280" text-anchor="middle" font-size="120">💗</text>
+          <text x="400" y="450" text-anchor="middle" font-size="34" font-family="Verdana, sans-serif" fill="#7f4a67">Imagen ${pageNumber}</text>
+        </svg>`;
+
+      return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+    }
+
+    function pageTemplate(imagePath, pageNumber) {
+      const fallback = createFallback(pageNumber);
+
+      return `
+        <div class="image-wrap only-image">
+          <img src="${imagePath}" alt="Imagen ${pageNumber}" onerror="this.onerror=null;this.src='${fallback}';" />
+        </div>
+        <span class="page-number">${pageNumber}</span>
+      `;
+    }
+
+    function renderSpread() {
+      const leftIndex = currentSpread * 2;
+      const rightIndex = leftIndex + 1;
+
+      leftPage.innerHTML = pageTemplate(pages[leftIndex], leftIndex + 1);
+      rightPage.innerHTML = pages[rightIndex]
+        ? pageTemplate(pages[rightIndex], rightIndex + 1)
+        : `<div class="empty-page">Fin del libro 💖</div><span class="page-number">${leftIndex + 2}</span>`;
+
+      prevBtn.disabled = currentSpread === 0;
+      nextBtn.disabled = currentSpread === spreadCount - 1;
+      pageIndicator.textContent = `Vista ${currentSpread + 1} de ${spreadCount}`;
+
+      leftPage.classList.remove("flip");
+      rightPage.classList.remove("flip");
+      void leftPage.offsetWidth;
+      leftPage.classList.add("flip");
+      rightPage.classList.add("flip");
+    }
+
+    prevBtn.addEventListener("click", () => {
+      if (currentSpread > 0) {
+        currentSpread -= 1;
+        renderSpread();
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (currentSpread < spreadCount - 1) {
+        currentSpread += 1;
+        renderSpread();
+      }
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "ArrowLeft" && currentSpread > 0) {
+        currentSpread -= 1;
+        renderSpread();
+      }
+
+      if (event.key === "ArrowRight" && currentSpread < spreadCount - 1) {
+        currentSpread += 1;
+        renderSpread();
+      }
+    });
+
+    renderSpread();
+  </script>
+</body>
+</html>
