@@ -55,6 +55,7 @@
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
     const pageIndicator = document.getElementById("pageIndicator");
+    const bookFrame = document.querySelector(".book-frame");
 
     const spreadCount = Math.ceil(pages.length / 2);
     let currentSpread = 0;
@@ -94,11 +95,17 @@
       leftPage.innerHTML = pageTemplate(pages[leftIndex], leftIndex + 1);
       rightPage.innerHTML = pages[rightIndex]
         ? pageTemplate(pages[rightIndex], rightIndex + 1)
-        : `<div class="empty-page">Amor, hoy cumplimos dos meses juntos y no puedo evitar sonreír al recordar todo lo que hemos vivido en tan poco tiempo. Parece que fue ayer cuando empezamos esto, pero al mismo tiempo siento que llevo toda una vida queriéndote.
-En estos dos meses me has enseñado lo bonito que es compartir los días contigo, las risas, las conversaciones hasta tarde, los abrazos que curan todo y hasta esos pequeños silencios que también dicen mucho.
-Gracias por elegirme cada día, por tu paciencia, tu forma de querer y por hacerme sentir tan especial.
-Es solo el comienzo, pero contigo quiero seguir cumpliendo meses, años y toda una vida 💗 </div><span class="page-number">${leftIndex + 2}</span>`;
+        : `
+          <div class="love-note">
+            <h2>Dos meses juntos 💗</h2>
+            <p>Amor, hoy cumplimos dos meses juntos y no puedo evitar sonreír al recordar todo lo que hemos vivido en tan poco tiempo.</p>
+            <p>Parece que fue ayer cuando empezamos esto, pero al mismo tiempo siento que llevo toda una vida queriéndote.</p>
+            <p>Gracias por elegirme cada día, por tu paciencia, tu forma de querer y por hacerme sentir tan especial.</p>
+            <p>Es solo el comienzo, y contigo quiero seguir cumpliendo meses, años y toda una vida 💗</p>
+          </div>
+          <span class="page-number">${leftIndex + 2}</span>`;
 
+      bookFrame.classList.toggle("note-spread", !pages[rightIndex]);
       prevBtn.disabled = currentSpread === 0;
       nextBtn.disabled = currentSpread === spreadCount - 1;
       pageIndicator.textContent = `Vista ${currentSpread + 1} de ${spreadCount}`;
