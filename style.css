@@ -68,15 +68,6 @@ body {
   border-radius: 28px;
   background: linear-gradient(135deg, #c99772, #b88262);
   box-shadow: var(--sombra);
-  transition: grid-template-columns 0.25s ease;
-}
-
-.book-frame.note-spread {
-  grid-template-columns: 0.7fr 1.3fr;
-}
-
-.book-frame.note-spread .book-spine {
-  left: 40%;
 }
 
 .book-spine {
@@ -171,37 +162,38 @@ body {
   color: #8b4c6f;
 }
 
-.love-note {
-  flex: 1;
+.final-note-page {
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+
+.final-note-content {
+  width: 100%;
+  max-width: 360px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  padding: 18px 18px 18px 24px;
-  border-radius: 16px;
-  background: linear-gradient(180deg, #fffafd, #fff1f7);
-  box-shadow: inset 0 0 0 1px rgba(186, 129, 157, 0.18);
-  color: #7a4561;
   text-align: center;
+  color: #7a4561;
   line-height: 1.5;
-  overflow-y: auto;
   font-size: clamp(0.85rem, 1vw, 1rem);
 }
 
-.love-note-icon {
-  font-size: 1.55rem;
+.final-note-icon {
+  font-size: 1.5rem;
 }
 
-.love-note h2 {
-  margin: 0 0 2px;
+.final-note-content h2 {
+  margin: 0;
   font-size: clamp(1rem, 1.2vw, 1.2rem);
   color: #8a3d67;
 }
 
-.love-note p {
+.final-note-content p {
   margin: 0;
-  max-width: 28ch;
 }
 
 .book-actions {
@@ -265,14 +257,6 @@ body {
     padding: 10px;
   }
 
-  .book-frame.note-spread {
-    grid-template-columns: 0.62fr 1.38fr;
-  }
-
-  .book-frame.note-spread .book-spine {
-    left: 35%;
-  }
-
   .book-spine {
     width: 10px;
   }
@@ -287,18 +271,21 @@ body {
     border-width: 5px;
   }
 
-  .love-note {
-    padding: 12px 12px 12px 20px;
+  .final-note-page {
+    padding: 10px;
+  }
+
+  .final-note-content {
     gap: 7px;
     font-size: 0.76rem;
     line-height: 1.42;
   }
 
-  .love-note-icon {
+  .final-note-icon {
     font-size: 1.2rem;
   }
 
-  .love-note h2 {
+  .final-note-content h2 {
     font-size: 0.88rem;
   }
 

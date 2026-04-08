@@ -96,16 +96,18 @@
       rightPage.innerHTML = pages[rightIndex]
         ? pageTemplate(pages[rightIndex], rightIndex + 1)
         : `
-          <div class="love-note">
-            <div class="love-note-icon">💌</div>
-            <h2>Dos meses juntos</h2>
-            <p>Gracias por hacer mis días más bonitos.</p>
-            <p>En este poquito tiempo te volviste alguien muy especial para mí.</p>
-            <p>Quiero seguir cumpliendo meses, años y muchos recuerdos contigo 💗</p>
+          <div class="image-wrap only-image final-note-page">
+            <div class="final-note-content">
+              <div class="final-note-icon">💌</div>
+              <h2>Dos meses juntos</h2>
+              <p>Gracias por hacer mis días más bonitos.</p>
+              <p>En este poquito tiempo te volviste alguien muy especial para mí.</p>
+              <p>Quiero seguir cumpliendo meses, años y muchos recuerdos contigo 💗</p>
+            </div>
           </div>
           <span class="page-number">${leftIndex + 2}</span>`;
 
-      bookFrame.classList.toggle("note-spread", !pages[rightIndex]);
+      bookFrame.classList.remove("note-spread");
       prevBtn.disabled = currentSpread === 0;
       nextBtn.disabled = currentSpread === spreadCount - 1;
       pageIndicator.textContent = `Vista ${currentSpread + 1} de ${spreadCount}`;
